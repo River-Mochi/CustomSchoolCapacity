@@ -364,3 +364,8 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 Library/ilpp.pid
+
+# --- allow CS2 mod publish profiles for this repo ---
+!Properties/PublishProfiles/
+!Properties/PublishProfiles/*.pubxml
+!Properties/PublishProfiles/*.publish.xml

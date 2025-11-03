@@ -1,24 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<!-- file where mod information which is required for publishing on PDX-->
+		<!-- PDX publish config must keep -->
 		<PublishConfigurationPath>Properties\PublishConfiguration.xml</PublishConfigurationPath>
-		<!--The folder where Game.dll is located. Set it only if the game is not installed in the default location, otherwise keep it empty-->
+
+		<!-- If your game is in the default location, leave this empty -->
 		<CustomManagedPath></CustomManagedPath>
 
 		<Configurations>Debug;Release</Configurations>
-		
-		<AssemblyName>SchoolCapacityChanger</AssemblyName>
-		<RootNamespace>SchoolCapacityChanger</RootNamespace>
+
+		<!-- Keep project/namespace flat -->
+		<RootNamespace>CustomSchoolCapacity</RootNamespace>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
-	
 
-	<!--CS2 Toolchain Imports must be after PropertyGroup block-->
+	<!-- Debug/Release constants -->
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<DefineConstants>TRACE;DEBUG</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<DefineConstants>TRACE</DefineConstants>
+	</PropertyGroup>
+
+	<!-- CS2 toolchain: must stay right after property groups -->
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.props" />
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.targets" />
 
-	<!-- Minimal explicit refs; toolchain wires most of them -->
+	<!-- Minimal explicit refs; toolchain wires most of the rest -->
 	<ItemGroup>
 		<Reference Include="Game"><Private>false</Private>
 		</Reference>
@@ -28,15 +37,13 @@
 		</Reference>
 		<Reference Include="Colossal.IO.AssetDatabase"><Private>false</Private>
 		</Reference>
+		<Reference Include="Colossal.Localization"><Private>false</Private>
+		</Reference>
 		<Reference Include="Colossal.UI"><Private>false</Private>
 		</Reference>
 		<Reference Include="Colossal.UI.Binding"><Private>false</Private>
 		</Reference>
-		<Reference Include="Colossal.Localization"><Private>false</Private>
-		</Reference>
 		<Reference Include="UnityEngine.CoreModule"><Private>false</Private>
-		</Reference>
-		<Reference Include="Unity.Burst"><Private>false</Private>
 		</Reference>
 		<Reference Include="Unity.Collections"><Private>false</Private>
 		</Reference>
@@ -46,41 +53,10 @@
 		</Reference>
 	</ItemGroup>
 
-	<ItemGroup>
-		<Reference Update="System">
-			<Private>false</Private>
-		</Reference>
-		<Reference Update="System.Core">
-			<Private>false</Private>
-		</Reference>
-		<Reference Update="System.Data">
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-
 	<!-- Link CS2 Mod toolchain files in Properties/ for easy viewing -->
 	<ItemGroup>
 		<None Include="$(ModPropsFile)" Link="Properties\Mod.props" />
 		<None Include="$(ModTargetsFile)" Link="Properties\Mod.targets" />
-	</ItemGroup>
-
-	<!-- docs/ and dist/: visible only; never compiled/copied/packed -->
-	<ItemGroup>
-		<Compile Remove="docs\**\*.*" />
-		<Content Remove="docs\**\*.*" />
-		<Compile Remove="dist\**\*.*" />
-		<Content Remove="dist\**\*.*" />
-
-		<None Include="docs\**\*.*">
-			<Visible>true</Visible>
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-			<Pack>false</Pack>
-		</None>
-		<None Include="dist\**\*.*">
-			<Visible>true</Visible>
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-			<Pack>false</Pack>
-		</None>
 	</ItemGroup>
 
 </Project>

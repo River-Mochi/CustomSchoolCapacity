@@ -1,8 +1,8 @@
-// Systems/SchoolCapacityChangerSystem.cs
-// Applies SCC settings to all school entities.
-// Captures original (vanilla) values once per entity and re-applies from baseline.
+// Systems/CustomSchoolCapacitySystem.cs
+// Applies CSC settings to all school entities.
+// Baselines once per entity, then reapply when settings change / on load.
 
-namespace SchoolCapacityChanger
+namespace CustomSchoolCapacity
 {
     using System.Collections.Generic;
     using Colossal.Serialization.Entities;
@@ -11,7 +11,7 @@ namespace SchoolCapacityChanger
     using Unity.Collections;
     using Unity.Entities;
 
-    public sealed partial class SchoolCapacityChangerSystem : GameSystemBase
+    public sealed partial class CustomSchoolCapacitySystem : GameSystemBase
     {
         private readonly Dictionary<Entity, BaselineData> m_BaselineByEntity =
             new Dictionary<Entity, BaselineData>(128);
@@ -29,6 +29,7 @@ namespace SchoolCapacityChanger
 
             RequireForUpdate(m_SchoolQuery);
 
+            // only run when asked
             Enabled = false;
         }
 
@@ -36,6 +37,7 @@ namespace SchoolCapacityChanger
         {
             base.OnGamePreload(purpose, mode);
 
+            // same behavior as the original mod: when you open a real game, do one pass
             if (mode == GameMode.Game)
             {
                 m_ReapplyRequested = true;
@@ -76,6 +78,7 @@ namespace SchoolCapacityChanger
                 var schoolData = EntityManager.GetComponentData<SchoolData>(entity);
                 var consumptionData = EntityManager.GetComponentData<ConsumptionData>(entity);
 
+                // capture vanilla / prefab value once
                 if (!m_BaselineByEntity.TryGetValue(entity, out var baseline))
                 {
                     baseline = new BaselineData
@@ -88,9 +91,12 @@ namespace SchoolCapacityChanger
                 }
 
                 var scalar = GetScalar(setting, baseline.EducationLevel);
+
+                // capacity
                 schoolData.m_StudentCapacity = (int)(baseline.StudentCapacity * scalar);
                 EntityManager.SetComponentData(entity, schoolData);
 
+                // upkeep
                 if (setting.ScaleUpkeepWithCapacity)
                 {
                     consumptionData.m_Upkeep = (int)(baseline.Upkeep * scalar);
@@ -109,13 +115,13 @@ namespace SchoolCapacityChanger
             Enabled = false;
         }
 
-        // === called from Setting.Apply() ===
+        // called from Setting.Apply()
         public void RequestReapplyFromSettings()
         {
             m_ReapplyRequested = true;
             Enabled = true;
 #if DEBUG
-            Mod.Log.Info("[SCC] Settings changed → reapply requested.");
+            Mod.Log.Info("[CSC] Settings changed → reapply requested.");
 #endif
         }
 

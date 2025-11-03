@@ -1,7 +1,7 @@
 // Localization/LocaleZH_CN.cs
-// Simplified Chinese strings for "[SCC] School Capacity Changer" (Options UI).
+// Simplified Chinese strings for "[CSC] Custom School Capacity" - Options UI.
 
-namespace SchoolCapacityChanger
+namespace CustomSchoolCapacity
 {
     using System.Collections.Generic;
     using Colossal;
@@ -22,7 +22,7 @@ namespace SchoolCapacityChanger
             return new Dictionary<string, string>
             {
                 // Mod root in Options
-                { m_Setting.GetSettingsLocaleID(), "[SCC] 学校容量调整" },
+                { m_Setting.GetSettingsLocaleID(), "[CSC] 学校容量调整" },
 
                 // Tabs
                 { m_Setting.GetOptionTabLocaleID(Setting.CapacitySection), "容量" },
