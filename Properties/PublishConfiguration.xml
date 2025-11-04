@@ -19,9 +19,10 @@ Customize how many students your schools can handle without adding more building
 - **Reset to Vanilla** button: all sliders back to 100% (game default)
 - **Quick Start values** button: reset to ASC Defaults button 200 / 150 / 120 / 120
 
-### Supports 9 languages
+### Supports 11 languages
 - English, Français French, Deutsch German, Español Spanish, Italiano Italian
-- 日本語 Japanese, 한국어 Korean, 简体中文 Simplified Chinese, 繁體中文 Traditional Chinese                                                                                                                                                                                                                                                                                                                                                                                                       
+- 日本語 Japanese, 한국어 Korean, 简体中文 Simplified Chinese, 繁體中文 Traditional Chinese
+- Polski Polish, Português-Brazilian Brazilian Portuguese                                                                                                                                                                                                                                                                                                                                                                                              
 
 ### Technical Notes
 - Safe to remove or disable at any time (just set the sliders to 100% for vanilla values)
@@ -53,13 +54,16 @@ Customize how many students your schools can handle without adding more building
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/adjust-school-capacity-redux.1866531/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.5.1" />
+	<ModVersion Value="1.5.2" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.3.6*" />
 	<!--Dependency for the mod, can be set multiple times-->
 	<Dependency Id="" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
-	<ChangeLog>* Add images, change name to Adjust School Capacity [ASC]</ChangeLog>
+	<ChangeLog>* Add images, change name to Adjust School Capacity [ASC]
+* Add Polish
+* Add Portuguese-Brazilian
+</ChangeLog>
 
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
 	<ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
