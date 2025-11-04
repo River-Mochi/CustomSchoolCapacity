@@ -47,6 +47,7 @@ Customize how many students your schools can handle without adding more building
 	<Screenshot Value="Properties/10-image-EN.jpg" />
 	<Screenshot Value="Properties/20-image-FR.jpg" />
 	<Screenshot Value="Properties/30-image-CN.jpg" />
+	<Screenshot Value="Properties/40-image-ElemSchool.jpg" />
 	<!--Tag, can be set multiple times-->
 	<Tag Value="Code Mod" />
 	<!--Link to the forum post where the mod can be discussed-->
