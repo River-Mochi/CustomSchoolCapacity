@@ -20,7 +20,8 @@ Change how many students your schools can handle without adding more buildings.
 ### 11 languages
 - English, Français French, Deutsch German, Español Spanish, Italiano Italian
 - 日本語 Japanese, 한국어 Korean, 简体中文 Simplified Chinese, 繁體中文 Traditional Chinese
-- Polski Polish, Português-Brazilian Brazilian Portuguese                                                                                                                                                                                                                                                                                                                                                                                              
+- Polski Polish, Português-Brazilian Brazilian Portuguese
+- Wip: European Portuguese                                                                                                                                                                                                                                                                                                                                                                                    
 
 ### Notes
 - Safe to remove or disable any time (set sliders to 100% for vanilla values)
@@ -57,7 +58,7 @@ tags: city schools, education capacity, automatic increase school size controlle
 	<!--Dependency for the mod, can be set multiple times-->
 	<Dependency Id="" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
-	<ChangeLog>* Add European Portuguese (pt-PT)
+	<ChangeLog>*Added European Portuguese (pt-PT)
 * refactor version numbering</ChangeLog>
 
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
