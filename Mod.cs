@@ -3,20 +3,34 @@
 
 namespace AdjustSchoolCapacity
 {
+    using System.Reflection;
     using Colossal.IO.AssetDatabase;
     using Colossal.Logging;
     using Game;
     using Game.Modding;
+    using Game.PSI;
     using Game.SceneFlow;
 
     public sealed class Mod : IMod
     {
-        // ---- Constants ----
-        public const string ModName = "Adjust School Capacity [ASC]";
-        public const string VersionShort = "1.5.4";
+        // ---- PUBLIC CONSTANTS / METADATA ----
+        public const string ModName = "Adjust School Capacity";
+        public const string ModId = "AdjustSchoolCapacity";
+        public const string ModTag = "[ASC]";
+
+        // ---- PRIVATE STATE ----
+        private static bool s_BannerLogged;
+        private static bool s_ReapplyingLocale;
+
+
+        /// <summary>
+        /// Read &lt;Version&gt; from .csproj (3-part).
+        /// </summary>
+        public static readonly string ModVersion =
+            Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.0";
 
         // ---- Logging ----
-        public static readonly ILog Log =
+        public static readonly ILog s_Log =
             LogManager.GetLogger("AdjustSchoolCapacity").SetShowsErrorsInUI(false);
 
         // ---- Settings instance ----
@@ -28,7 +42,12 @@ namespace AdjustSchoolCapacity
         // ---- Lifecycle ----
         public void OnLoad(UpdateSystem updateSystem)
         {
-            Log.Info($"{ModName} v{VersionShort} OnLoad");
+            // Metadata banner (once per session).
+            s_Log.Info($"{ModName} {ModTag} v{ModVersion} OnLoad");
+            if (!s_BannerLogged)
+            {
+                s_BannerLogged = true;
+            }
 
             var setting = new Setting(this);
             Setting = setting;
@@ -37,7 +56,7 @@ namespace AdjustSchoolCapacity
             var lm = GameManager.instance?.localizationManager;
             if (lm == null)
             {
-                Log.Warn("LocalizationManager is null; skipping locale registration.");
+               s_Log.Warn("LocalizationManager is null; skipping locale registration.");
             }
             else
             {
@@ -71,7 +90,7 @@ namespace AdjustSchoolCapacity
                 Setting = null;
             }
 
-            Log.Info("OnDispose");
+           s_Log.Info("OnDispose");
         }
     }
 }

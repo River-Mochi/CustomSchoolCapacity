@@ -127,7 +127,7 @@ namespace AdjustSchoolCapacity
         public string NameDisplay => Mod.ModName;
 
         [SettingsUISection(AboutTab, AboutInfoGroup)]
-        public string VersionDisplay => Mod.VersionShort;
+        public string VersionDisplay => Mod.ModVersion;
 
         [SettingsUIButtonGroup(AboutLinksGroup)]
         [SettingsUIButton]

@@ -111,7 +111,7 @@ namespace AdjustSchoolCapacity
             m_ReapplyRequested = true;
             Enabled = true;
 #if DEBUG
-            Mod.Log.Info("[ASC] Settings changed → reapply requested.");
+            Mod.s_Log.Info("[ASC] Settings changed → reapply requested.");
 #endif
         }
 
