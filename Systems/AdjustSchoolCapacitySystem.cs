@@ -56,17 +56,20 @@ namespace AdjustSchoolCapacity
                 return;
             }
 
-            var schools = m_SchoolQuery.ToEntityArray(Allocator.Temp);
+            NativeArray<Entity> schools = m_SchoolQuery.ToEntityArray(Allocator.Temp);
             if (!schools.IsCreated || schools.Length == 0)
             {
                 if (schools.IsCreated)
+                {
                     schools.Dispose();
+                }
+
                 m_ReapplyRequested = false;
                 Enabled = false;
                 return;
             }
 
-            var setting = Mod.Setting;
+            Setting? setting = Mod.Setting;
             if (setting == null)
             {
                 schools.Dispose();
@@ -77,13 +80,13 @@ namespace AdjustSchoolCapacity
 
             for (int i = 0; i < schools.Length; i++)
             {
-                var entity = schools[i];
+                Entity entity = schools[i];
 
                 // Read current components
-                var schoolData = EntityManager.GetComponentData<SchoolData>(entity);
+                SchoolData schoolData = EntityManager.GetComponentData<SchoolData>(entity);
 
                 // Cache baseline once
-                if (!m_BaselineByEntity.TryGetValue(entity, out var baseline))
+                if (!m_BaselineByEntity.TryGetValue(entity, out BaselineData baseline))
                 {
                     baseline = new BaselineData
                     {
@@ -94,7 +97,7 @@ namespace AdjustSchoolCapacity
                 }
 
                 // Compute scalar by level and apply to capacity
-                var scalar = GetScalar(setting, baseline.EducationLevel);
+                double scalar = GetScalar(setting, baseline.EducationLevel);
                 schoolData.m_StudentCapacity = (int)(baseline.StudentCapacity * scalar);
                 EntityManager.SetComponentData(entity, schoolData);
             }

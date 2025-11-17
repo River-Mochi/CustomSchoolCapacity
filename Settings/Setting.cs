@@ -45,20 +45,23 @@ namespace AdjustSchoolCapacity
         {
             // Fresh install → seed defaults
             if (ElementarySlider == 0)
+            {
                 SetDefaults();
+            }
         }
 
         public override void Apply()
         {
             base.Apply();
 
-            var world = World.DefaultGameObjectInjectionWorld;
+            World world = World.DefaultGameObjectInjectionWorld;
             if (world == null)
-                return;
+            {    return; }
 
-            var system = world.GetExistingSystemManaged<AdjustSchoolCapacitySystem>();
-            if (system != null)
-                system.RequestReapplyFromSettings();
+            AdjustSchoolCapacitySystem system =
+                world.GetExistingSystemManaged<AdjustSchoolCapacitySystem>();
+
+            system.RequestReapplyFromSettings();
         }
 
         // ---- Sliders (10–500%, step 10%) ----
@@ -101,7 +104,8 @@ namespace AdjustSchoolCapacity
             set
             {
                 if (!value)
-                    return;
+                { return; }
+
                 SetToVanilla();
                 Apply();
             }
@@ -115,7 +119,8 @@ namespace AdjustSchoolCapacity
             set
             {
                 if (!value)
-                    return;
+                {    return; }
+
                 SetDefaults();
                 Apply();
             }
@@ -137,12 +142,15 @@ namespace AdjustSchoolCapacity
             set
             {
                 if (!value)
-                    return;
+                {     return;  }
+
                 try
                 {
                     Application.OpenURL(UrlParadox);
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
 
@@ -154,12 +162,15 @@ namespace AdjustSchoolCapacity
             set
             {
                 if (!value)
-                    return;
+                {   return; }
+
                 try
                 {
                     Application.OpenURL(UrlDiscord);
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
             }
         }
 
