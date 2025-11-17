@@ -8,7 +8,6 @@ namespace AdjustSchoolCapacity
     using Colossal.Logging;
     using Game;
     using Game.Modding;
-    using Game.PSI;
     using Game.SceneFlow;
 
     public sealed class Mod : IMod
@@ -20,8 +19,6 @@ namespace AdjustSchoolCapacity
 
         // ---- PRIVATE STATE ----
         private static bool s_BannerLogged;
-        private static bool s_ReapplyingLocale;
-
 
         /// <summary>
         /// Read &lt;Version&gt; from .csproj (3-part).
@@ -43,9 +40,9 @@ namespace AdjustSchoolCapacity
         public void OnLoad(UpdateSystem updateSystem)
         {
             // Metadata banner (once per session).
-            s_Log.Info($"{ModName} {ModTag} v{ModVersion} OnLoad");
             if (!s_BannerLogged)
             {
+                s_Log.Info($"{ModName} {ModTag} v{ModVersion} OnLoad");
                 s_BannerLogged = true;
             }
 

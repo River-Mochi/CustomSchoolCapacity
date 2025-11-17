@@ -87,10 +87,10 @@ namespace AdjustSchoolCapacity
                 { m_Setting.GetOptionDescLocaleID(nameof(Setting.VersionDisplay)),  "Current mod version." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenParadoxMods)), "Paradox Mods" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadoxMods)),  "Open this mod on the Paradox Mods site in a browser." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenParadoxMods)),  "Open Paradox website for this author's mods." },
 
                 { m_Setting.GetOptionLabelLocaleID(nameof(Setting.OpenDiscord)), "Discord" },
-                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)),  "Open the community Discord in a browser." },
+                { m_Setting.GetOptionDescLocaleID(nameof(Setting.OpenDiscord)),  "Open Discord community support in a browser." },
             };
         }
 

@@ -6,13 +6,13 @@
 		<CustomManagedPath></CustomManagedPath>
 		<Configurations>Debug;Release</Configurations>
 		<RootNamespace>AdjustSchoolCapacity</RootNamespace>
+		<Nullable>enable</Nullable>
+
   <!-- Single source of truth -->
 	  <Version>1.5.5</Version>
 	<AssemblyVersion>$(Version).0</AssemblyVersion>
 	<FileVersion>$(Version).0</FileVersion>  <!-- for file properties -->
 
-
-		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
