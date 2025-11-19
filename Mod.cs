@@ -5,6 +5,7 @@ namespace AdjustSchoolCapacity
 {
     using System.Reflection;
     using Colossal.IO.AssetDatabase;
+    using Colossal.Localization;
     using Colossal.Logging;
     using Game;
     using Game.Modding;
@@ -50,24 +51,25 @@ namespace AdjustSchoolCapacity
             Setting = setting;
 
             // Register locales
-            if (GameManager.instance?.localizationManager == null)
+            LocalizationManager? lm = GameManager.instance?.localizationManager;
+            if (lm == null)
             {
-                s_Log.Warn("LocalizationManager is null; skipping locale registration.");
+                Mod.s_Log.Warn("LocalizationManager is null; skipping locale registration.");
             }
             else
             {
-                GameManager.instance.localizationManager.AddSource("en-US", new LocaleEN(setting));
-                GameManager.instance.localizationManager.AddSource("es-ES", new LocaleES(setting));
-                GameManager.instance.localizationManager.AddSource("fr-FR", new LocaleFR(setting));
-                GameManager.instance.localizationManager.AddSource("de-DE", new LocaleDE(setting));
-                GameManager.instance.localizationManager.AddSource("it-IT", new LocaleIT(setting));
-                GameManager.instance.localizationManager.AddSource("ja-JP", new LocaleJA(setting));
-                GameManager.instance.localizationManager.AddSource("ko-KR", new LocaleKO(setting));
-                GameManager.instance.localizationManager.AddSource("pl-PL", new LocalePL(setting));
-                GameManager.instance.localizationManager.AddSource("pt-BR", new LocalePT_BR(setting));
-                GameManager.instance.localizationManager.AddSource("pt-PT", new LocalePT_PT(setting));
-                GameManager.instance.localizationManager.AddSource("zh-HANS", new LocaleZH_CN(setting));
-                GameManager.instance.localizationManager.AddSource("zh-HANT", new LocaleZH_HANT(setting));
+                lm.AddSource("en-US", new LocaleEN(setting));
+                lm.AddSource("de-DE", new LocaleDE(setting));
+                lm.AddSource("es-ES", new LocaleES(setting));
+                lm.AddSource("fr-FR", new LocaleFR(setting));
+                lm.AddSource("it-IT", new LocaleIT(setting));
+                lm.AddSource("ja-JP", new LocaleJA(setting));
+                lm.AddSource("ko-KR", new LocaleKO(setting));
+                lm.AddSource("pl-PL", new LocalePL(setting));
+                lm.AddSource("pt-BR", new LocalePT_BR(setting));
+                lm.AddSource("pt-PT", new LocalePT_PT(setting));  // <– new European Portuguese
+                lm.AddSource("zh-HANS", new LocaleZH_CN(setting));
+                lm.AddSource("zh-HANT", new LocaleZH_HANT(setting));
             }
 
             // Load saved settings, then show Options UI
